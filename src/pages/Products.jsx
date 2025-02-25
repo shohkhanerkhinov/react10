@@ -38,6 +38,10 @@ function Products() {
             url = `/products?search=${filter.search}&category=${filter.category}&company=${filter.company}&order=${filter.order}&price=${filter.price}&shipping=${filter.shipping ? 'on' : ''}`
         }
 
+        if (searchParams.get('page')) {
+            setCurrentPage(searchParams.get('page'))
+        }
+
         http.get(url)
             .then(response => {
                 if (response.status === 200) {
@@ -87,6 +91,7 @@ function Products() {
 
     function handlePagination(event, target) {
         setCurrentPage(target)
+        setCurrentPage({page: target})
     }
 
     return (

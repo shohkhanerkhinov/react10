@@ -7,33 +7,43 @@ import Details from './pages/Details'
 import Products from './pages/Products'
 import Cart from './pages/Cart'
 import './App.css'
+import { createContext, useEffect, useState } from 'react'
+
+export const CartContext = createContext();
+
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    console.log('cart', cart);
+    
+  }, [cart])
 
   return (
-    <div>
+    <CartContext.Provider  value={{cart, setCart}}>
       <Routes>
-        
-        <Route path='/' element ={<MainLayout><Home></Home></MainLayout>} >
+
+        <Route path='/' element={<MainLayout><Home></Home></MainLayout>} >
         </Route>
 
 
-        <Route path='/about' element ={<MainLayout><About></About></MainLayout>} >
+        <Route path='/about' element={<MainLayout><About></About></MainLayout>} >
         </Route>
 
 
-        <Route path='/products' element ={<MainLayout><Products></Products></MainLayout>} >
+        <Route path='/products' element={<MainLayout><Products></Products></MainLayout>} >
         </Route>
 
 
-        <Route path='/products/:id' element ={<MainLayout><Details></Details></MainLayout>} >
+        <Route path='/products/:id' element={<MainLayout><Details></Details></MainLayout>} >
         </Route>
 
 
-        <Route path='/cart' element ={<MainLayout><Cart></Cart></MainLayout>} >
+        <Route path='/cart' element={<MainLayout><Cart></Cart></MainLayout>} >
         </Route>
-     </Routes>
-    </div>
+      </Routes>
+    </CartContext.Provider>
   )
 }
 
